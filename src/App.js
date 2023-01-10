@@ -26,25 +26,29 @@ function App() {
       setDisplayValue(displayValue + '.');
     }
   }
-
-  function inputOperator(newOperator) {
-    const inputValue = parseFloat(displayValue);
-    if (newOperator === '=') {
-      setAccumulator(null);
-    }
-    
-    if (accumulator === null) {
-      setAccumulator(inputValue);
-    } else if (operator) {
-      const result = performCalculation[operator](accumulator, inputValue);
-      setAccumulator(result);
-      setDisplayValue(String(result));
-    }
-
-    setWaitingForOperand(true);
-    setOperator(newOperator);
+ function inputOperator(newOperator) {
+  const inputValue = parseFloat(displayValue);
+  if (newOperator === '=') {
+    setAccumulator(null);
   }
+  
+  if (accumulator === null) {
+    setAccumulator(inputValue);
+  } else if (operator && (operator !== '-' || newOperator !== '-')) {
+    const result = performCalculation[operator](accumulator, inputValue);
+    setAccumulator(result);
+    setDisplayValue(String(result));
+  }
+  
+  setWaitingForOperand(true);
+  setOperator(newOperator);
+}
 
+  
+  
+  
+  
+  
   function clear() {
     setAccumulator(null);
     setOperator(null);
